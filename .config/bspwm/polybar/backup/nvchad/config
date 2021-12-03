@@ -1,0 +1,593 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[color]
+BG = #1E2128
+BGL = #2A2D34
+BGA = #808080
+FG = #D8D8D8
+AC = #62AEEF
+
+BLACK = #000000
+WHITE = #FFFFFF
+RED = #E06B74
+GREEN = #98C379
+YELLOW = #E5C07A
+BLUE = #62AEEF
+PURPLE = #C778DD
+CYAN = #55B6C2
+TEAL = #8BC5BF
+AMBER = #D4B158
+ORANGE = #D49474
+BROWN = #AC8476
+GRAY = #8C8C8C
+BLUEGRAY = #6F8A91
+PINK = #D46389
+LIME = #D7DD91
+INDIGO = #7985D0
+
+[colors]
+background = ${xrdb:background}
+;foreground = #676b73 
+foreground = ${xrdb:foreground}
+
+color0 = ${xrdb:color0}
+color1 = ${xrdb:color1}
+color2 = ${xrdb:color2}
+color3 = ${xrdb:color3}
+color4 = ${xrdb:color4}
+color5 = ${xrdb:color5}
+color6 = ${xrdb:color6}
+color7 = ${xrdb:color7}
+color8 = ${xrdb:color8}
+color9 = ${xrdb:color9}
+color10 = ${xrdb:color10}
+color11 = ${xrdb:color11}
+color12 = ${xrdb:color12}
+color13 = ${xrdb:color13}
+color14 = ${xrdb:color14}
+color15 = ${xrdb:color15}
+dark-light = #272A2B 
+active-light = #313435
+
+[bar/main]
+monitor = eDP1
+width =  100%
+height = 20
+padding-left =1
+padding-right =0
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+bottom = false
+border-top-size = 5
+border-bottom-size = 5
+border-top-color = ${colors.background}
+border-bottom-color = ${colors.background}
+
+line-size = 2
+wm-restack = 
+
+enable-ipc = true
+
+modules-left = round-left bspwm round-right empty-space polywins round-left spotify-prev spotify-play-pause spotify-next round-right spotify
+modules-center =  
+modules-right = temperature alsa xbacklight battery round-left cpu round-right round-left mem round-right round-left wlan ethernet round-right round-left time  round-right  round-left powermenu round-right
+font-0 = JetBrainsMono Nerd Font:style=Bold:pixelsize=9;3
+font-1 = JetBrainsMono Nerd Font:size=14;4
+font-2 = Material Design Icons:style=Bold:size=9;3
+font-3 = unifont:fontformat=truetype:size=9;3
+font-4 = JetBrainsMono Nerd Font:size=13;4 						# Spotify icon
+font-5 = JetBrainsMono Nerd Font:pixelsize=9;3 					# Power icon
+font-6 = Noto Sans CJK JP:size=9:antialias=true;3 	# Japanese song name
+;tray-position = right
+;tray-padding = 2
+;tray-background = ${colors.background}
+
+[module/polywins]
+type = custom/script
+exec = ~/.config/polybar/scripts/polywins.sh 2>/dev/null
+format = <label>
+format-background = #2a2e36
+label = %output%
+label-padding = 0
+tail = true
+
+[module/empty-space]
+type = custom/text
+content = "  "
+
+[module/round-left]
+type = custom/text
+content = %{T3}%{T-}
+content-foreground = #2a2e36
+
+[module/round-right]
+type = custom/text
+content = %{T3}%{T-}
+content-foreground = #2a2e36
+
+[module/roundd-left]
+type = custom/text
+content = %{T3}%{T-}
+content-foreground = #a3be8c 
+
+[module/roundd-right]
+type = custom/text
+content = %{T3}%{T-}
+content-foreground = #a3be8c
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 6
+warn-temperature = 70
+
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input
+
+format = <ramp> <label>
+format-warn = <ramp> <label-warn>
+format-padding = 1
+label = %temperature%
+label-warn = %temperature%
+ramp-0 =  "ﰕ" 
+ramp-font = 3
+ramp-foreground = #a4ebf3
+
+[module/openbox]
+type = internal/xworkspaces
+
+pin-workspaces = true
+inline-mode = true
+enable-click = true
+enable-scroll = true
+reverse-scroll = false
+
+format = <label-state>
+
+icon-0 = 1;%{F#F9DE8F}  
+icon-1 = 2;%{F#ff9b93}   
+icon-2 = 3;%{F#95e1d3}    
+icon-3 = 4;%{F#81A1C1}
+icon-4 = 5;%{F#A3BE8C}
+
+label-separator = " "
+label-separator-background = #2a2e36
+
+label-focused =  %icon%  
+label-focused-foreground = ${colors.foreground}
+label-focused-padding = 1
+label-focused-background = #464a52
+label-focused-margin = 0 
+
+label-active =  %icon%  
+label-active-foreground = ${colors.foreground}
+label-active-background = #2a2e36
+label-active-padding = 1
+label-active-underline = #565c64
+line-size = 10
+label-active-margin = 0 
+
+
+label-occupied =  %icon%
+label-occupied-foreground = #646870  
+label-occupied-background = #2a2e36
+label-occupied-padding = 1
+label-occupied-margin = 0 
+
+label-empty = %icon%
+label-empty-foreground =   ${colors.foreground}
+label-empty-padding = 1
+label-empty-background = #2a2e36
+label-empty-margin = 0 
+
+
+label-urgent = %icon%
+label-urgent-foreground = #88C0D0
+label-urgent-background = #2a2e36
+label-urgent-padding = 1
+
+[module/mpd]
+type = internal/mpd
+
+; Host where mpd is running (either ip or domain name)
+; Can also be the full path to a unix socket where mpd is running.
+; host = 127.0.0.1
+; port = 6600
+; password = mysecretpassword
+
+; Seconds to sleep between progressbar/song timer sync
+; Default: 1
+interval = 2
+
+; Available tags:
+;   <label-song> (default)
+;   <label-time>
+;   <bar-progress>
+;   <toggle> - gets replaced with <icon-(pause|play)>
+;   <toggle-stop> - gets replaced with <icon-(stop|play)>
+;   <icon-random>
+;   <icon-repeat>
+;   <icon-repeatone> (deprecated)
+;   <icon-single> - Toggle playing only a single song. Replaces <icon-repeatone>
+;   <icon-consume>
+;   <icon-prev>
+;   <icon-stop>
+;   <icon-play>
+;   <icon-pause>
+;   <icon-next>
+;   <icon-seekb>
+;   <icon-seekf>
+
+format-online = <icon-prev> <toggle> <icon-next>
+;;format-online-prefix = " "
+;;format-online-prefix-font = 2
+;;format-online-prefix-foreground = ${color.GREEN}
+format-online-background = ${color.BGL}
+
+format-playing = ${self.format-online}
+format-paused = ${self.format-online}
+format-stopped = ${self.format-online}
+
+; Available tags:
+;   <label-offline>
+format-offline = <label-offline>
+#format-offline-prefix = " "
+format-offline-background = ${color.BGL}
+
+; Available tokens:
+;   %artist%
+;   %album-artist%
+;   %album%
+;   %date%
+;   %title%
+; Default: %artist% - %title%
+label-song =  "%artist% - %title%"
+label-song-maxlen = 25
+label-song-ellipsis = true
+
+; Available tokens:
+;   %elapsed%
+;   %total%
+; Default: %elapsed% / %total%
+;;abel-time = %elapsed% / %total%
+
+; Available tokens:
+;   None
+label-offline = ""
+
+; Only applies if <icon-X> is used
+icon-play = 
+icon-play-font = 2
+icon-play-foreground = ${color.GREEN}
+icon-pause = 
+icon-pause-font = 2
+icon-pause-foreground = ${color.YELLOW}
+icon-stop = 
+icon-stop-foreground = ${color.RED}
+icon-prev = 玲
+icon-prev-font = 1
+icon-prev-foreground = ${color.TEAL}
+icon-next = 怜
+icon-next-font = 1
+icon-next-foreground = ${color.TEAL}
+
+; Used to display the state of random/repeat/repeatone/single
+; Only applies if <icon-[random|repeat|repeatone|single]> is used
+;;toggle-on-foreground = #ff
+;;toggle-off-foreground = #55
+
+;;-----------
+[module/song]
+type = internal/mpd
+
+interval = 2
+
+format-online = <label-song>
+format-online-font = 5
+format-offline = <label-offline>
+format-offline-font = 5
+
+format-playing = ${self.format-online}
+format-paused = "${self.format-online}"
+format-stopped = ""
+
+label-offline =  "Offline"
+label-song =  "%title%"
+label-song-maxlen = 25
+label-song-ellipsis = true
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/spotify]
+type = custom/script
+tail = true
+format-prefix = "%{T5}  "
+format = %{T7}<label>
+format-online = <icon-prev> <toggle> <icon-next>
+exec = ~/.config/polybar/simple/nvchad/scripts/scroll_spotify_status.sh
+;label-offline = ""
+
+[module/spotify-play-pause]
+type = custom/ipc
+hook-1 = echo "%{T2}"
+hook-0 = echo "%{T2}"
+format-foreground = ${color.GREEN}
+format-background = ${color.BGL}
+initial = 2
+click-left = playerctl play-pause spotify
+
+[module/spotify-prev]
+type = custom/script
+exec = echo "玲 "
+format = <label>
+click-left = playerctl previous -p spotify
+format-background = ${color.BGL}
+format-foreground = ${color.TEAL}
+
+[module/spotify-next]
+type = custom/script
+exec = echo " 怜"
+format = <label>
+click-left = playerctl next -p spotify
+format-background = ${color.BGL}
+format-foreground = ${color.TEAL}
+
+[module/bspwm]
+type = internal/bspwm
+
+pin-workspaces = true
+inline-mode = true
+enable-click = true
+enable-scroll = true
+reverse-scroll = false
+
+format = <label-state>
+
+ws-icon-0 = 1;%{F#A3BE8C}    
+ws-icon-1 = 2;%{F#F9DE8F}    
+ws-icon-2 = 3;%{F#95e1d3}       
+ws-icon-3 = 4;%{F#81A1C1}  
+ws-icon-4 = 5;%{F#ff9b93}
+
+label-separator = ""
+label-separator-background = #2a2e36
+
+label-focused =  %icon%  
+label-focused-foreground = ${colors.foreground}
+label-focused-padding = 1
+label-focused-background = #464a52
+label-focused-margin = 0 
+
+label-active =  %icon%  
+label-active-foreground = ${colors.foreground}
+label-active-background = #2a2e36
+label-active-padding = 1
+label-active-underline = #565c64
+line-size = 10
+label-active-margin = 0 
+
+label-occupied =  %icon%  
+label-occupied-foreground = #646870  
+label-occupied-background = #2a2e36
+label-occupied-padding = 1
+label-occupied-margin = 0 
+
+label-empty = %icon%
+label-empty-foreground =   ${colors.foreground}
+label-empty-padding = 1
+label-empty-background = #2a2e36
+label-empty-margin = 0 
+
+
+label-urgent = %icon%
+label-urgent-foreground = #88C0D0
+label-urgent-background = #2a2e36
+label-urgent-padding = 1
+
+[module/alsa]
+type = internal/pulseaudio
+sink = alsa_output.pci-0000_12_00.3.analog-stereo
+
+format-volume = <label-volume> <bar-volume>
+label-volume = " "  
+label-volume-foreground = ${colors.foreground}
+format-muted-foreground = ${colors.foreground}
+label-muted = "%{F#f25287} "
+
+format-muted-padding = 1
+
+bar-volume-width = 10
+bar-volume-foreground-0 = #61afef
+bar-volume-foreground-1 = #61afef
+bar-volume-foreground-2 = #61afef
+bar-volume-foreground-3 = #61afef
+bar-volume-foreground-4 = #61afef
+bar-volume-foreground-5 = #61afef
+bar-volume-foreground-6 = #61afef
+bar-volume-gradient = false
+bar-volume-indicator = 
+bar-volume-indicator-foreground = #61afef
+bar-volume-indicator-font = 2
+bar-volume-fill = ━ 
+bar-volume-fill-foreground = #61afef
+bar-volume-fill-font = 2
+bar-volume-empty = ━
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = #565c64
+format-volume-padding = 2
+
+[module/time]
+type = internal/date
+interval = 60
+
+format = <label>
+format-background = #2a2e36
+format-foreground = #82868e
+
+date =  %H:%M%{F-}
+time-alt =  %a, %b %d%{F-}
+
+label = %date%%time%
+
+[module/mem]
+type = internal/memory
+interval = 3
+format = <label>
+format-prefix = "﬙" 
+label = MEM %mb_used%
+label-padding = 1
+format-background = #2a2e36
+format-foreground = #D19A66
+format-prefix-foreground = #d19a66
+
+[module/updates]
+type = custom/script
+exec = doas xbps-install -S > /dev/null 2>&1; xbps-updates
+format = <label>
+interval = 4600 
+label =  %output%  
+label-padding = 2
+label-foreground = #BF616A 
+
+
+[module/powermenu]
+type = custom/text 
+content ="%{T6}" 
+;content-padding = 1
+click-left = ~/.config/bspwm/rofi/bin/powermenu
+content-foreground = #f25287
+content-background = #2a2e36
+
+[module/wlan]
+type = internal/network
+interface = wlan0
+interval = 3.0
+
+format-connected =  <label-connected>
+label-connected = "%{A1:networkmanager_dmenu &:}直 " 
+label-connected-foreground = #A3BE8C 
+format-connected-background = #2a2e36
+
+label-disconnected = "%{A1:networkmanager_dmenu &:}睊 "
+format-disconnected =  <label-disconnected>
+label-disconnected-foreground = #D34B7A
+format-disconnected-background = #2a2e36
+
+[module/ethernet]
+type = internal/network
+interface = enp7s0
+
+interval = 1.0
+accumulate-stats = true
+unknown-as-up = true
+
+format-connected = <label-connected>
+format-connected-prefix = "%{A1:networkmanager_dmenu &:}歷 "
+format-connected-prefix-foreground = ${color.PURPLE}
+format-connected-background = #2a2e36
+format-connected-padding = 1
+
+format-disconnected = <label-disconnected>
+format-disconnected-prefix = "%{A1:networkmanager_dmenu &:}轢 "
+format-disconnected-foreground = ${color.BGA}
+format-disconnected-background = #2a2e36
+format-disconnected-padding = 1
+
+label-connected = "%{A1:networkmanager_dmenu &:}%downspeed% | %upspeed%%{A}"
+label-disconnected = "%{A1:networkmanager_dmenu &:}Offline%{A}"
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC0
+full-at = 98
+
+format-charging = <animation-charging> <label-charging>
+label-charging = %percentage%%
+format-charging-foreground = ${colors.color4}
+format-charging-background = ${colors.background}
+
+format-discharging = <ramp-capacity> <label-discharging>
+label-discharging = %percentage%%
+format-discharging-foreground = ${colors.foreground}
+format-discharging-background = ${colors.background}
+
+format-full-prefix = "" 
+format-full-prefix-foreground = #A0E8A2
+format-foreground = ${colors.color4}
+format-background = ${colors.background}
+
+label-discharging-foreground = ${colors.foreground}
+ramp-capacity-foreground =  #A0E8A2  
+label-charging-foreground = ${colors.foreground}
+
+label-padding = 1
+
+ramp-capacity-0 = ""  
+ramp-capacity-1 = "" 
+ramp-capacity-2 = "" 
+ramp-capacity-3 = "" 
+ramp-capacity-4 = ""
+
+
+animation-charging-0 = "" 
+animation-charging-1 = "" 
+animation-charging-2 = "" 
+animation-charging-3 = "" 
+animation-charging-4 = ""
+
+
+animation-charging-foreground = #DF8890
+animation-charging-framerate = 750
+
+format-charging-padding = 1
+format-discharging-padding = 1
+
+[module/volume]
+type = custom/script
+exec = amixer get Master | awk '$0~/%/{print $4}' | tr -d '[]'
+format = <label>
+internal = 5.0
+label = %output% 
+label-foreground = #BF616A
+label-padding = 1
+
+[module/xbacklight]
+type = internal/xbacklight
+format = <label>
+format-prefix = " "
+label = %percentage%
+format-prefix-foreground = #61afef
+label-foreground =   #D8DEE9
+format-padding = 1
+
+[module/cpu]
+type = internal/cpu
+interval = 2.5
+
+format-prefix =" " 
+format =  <label> 
+
+label = CPU %percentage%%
+format-background = #2a2e36
+format-foreground = #989cff
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...
+

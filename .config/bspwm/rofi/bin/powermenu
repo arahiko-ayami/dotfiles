@@ -32,16 +32,8 @@ $lock)
   betterlockscreen -l
   ;;
 $suspend)
-  ans=$(confirm_exit &)
-  if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
-    mpc -q pause
-    amixer set Master mute
-    systemctl suspend
-  elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
-    exit 0
-  else
-    msg
-  fi
+  mpc -q pause
+  systemctl suspend
   ;;
 $logout)
   if [[ "$DESKTOP_SESSION" == "Openbox" ]]; then

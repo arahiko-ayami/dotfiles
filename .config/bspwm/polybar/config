@@ -42,8 +42,8 @@ module-margin-right = 0
 
 include-file = ~/.config/bspwm/polybar/fonts.ini
 
-modules-left = left-cyan launcher right-cyan-shade bspwm right sep-background left spotify-prev spotify-play-pause spotify-next right sep-background left spotify right
-modules-center = 
+modules-left = left-cyan launcher right-cyan-shade bspwm right sep-background left title right
+modules-center = sep-background left spotify-prev spotify-play-pause spotify-next right sep-background left-green spotify right
 modules-right = sep-background left info-trash space-shade updates-pacman-aurhelper space-shade notification-github right sep-background left xbacklight right sep-background left ibus right sep-background ibus-trigger left wifi space-shade cpu space-shade memory space-shade alsa space-shade date space-shade sysmenu right
 
 separator =

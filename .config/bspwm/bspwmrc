@@ -163,23 +163,17 @@ nitrogen --restore
 # Start mpd
 exec mpd &
 
-# Start mopidy
-# exec mopidy &
-
 # Start bspwm scripts
 bspcolors
 bspbar
 bspcomp
 bspfloat &
 
+## Pulseeffects
+pulseeffects --gapplication-service
+
 # Compability with JetBrains IDEs
 wmname LG3D
 
-# spotifyd
-env SPOTIFYD_CLIENT_ID=691db87fe7c1449182852285d7dbf37f spotifyd
-
 # playerctld
 playerctld
-
-## Pulseeffects
-pulseeffects --gapplication-service

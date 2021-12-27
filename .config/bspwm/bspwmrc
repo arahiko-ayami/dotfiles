@@ -170,10 +170,10 @@ bspcomp
 bspfloat &
 
 ## Pulseeffects
-pulseeffects --gapplication-service
+pulseeffects --gapplication-service &
 
 # Compability with JetBrains IDEs
-wmname LG3D
+wmname LG3D &
 
 # playerctld
-playerctld
+playerctld &

@@ -26,11 +26,12 @@ update_hooks() {
 
 PLAYERCTL_STATUS=$(playerctl --player=$PLAYER status 2>/dev/null)
 EXIT_CODE=$?
+# SPOTIFY_VERSION="v"$(pacman -Qi spotify | grep 'Version' | grep -o "[0-9\.]\{10\}")
 
 if [ $EXIT_CODE -eq 0 ]; then
     STATUS=$PLAYERCTL_STATUS
 else
-    STATUS="v"$(yay -Q | grep "spotify [0-9]" | grep -o "[0-9\.]\{10\}")
+    STATUS="Spotify"
 fi
 
 if [ "$1" == "--status" ]; then
@@ -41,7 +42,7 @@ else
     elif [ "$STATUS" = "Paused"  ]; then
         update_hooks "$PARENT_BAR_PID" 2
         playerctl --player=$PLAYER metadata --format "$FORMAT"
-    elif [ "$STATUS" = "v"$(yay -Q | grep "spotify [0-9]" | grep -o "[0-9\.]\{10\}")  ]; then
+    elif [ "$STATUS" = "Spotify" ]; then
         echo "$STATUS"
     else
         update_hooks "$PARENT_BAR_PID" 1
